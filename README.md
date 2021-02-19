@@ -19,7 +19,7 @@ Pasirinkimo metu, vartotojui pasirinkus 'n', rezultatai/kiekis yra sugeneruojami
 Tuomet yra išvedama lentelė su įvestais duomenimis, kurią sudaro skiltys "Vardas", "Pavardė" ir pasirinktinai - "Galutinis(vid.)" arba "Galutinis(med.).
 
 # Programos įdiegimas
-- Atsisiųskite programos versiją iš [releases](
+- Atsisiųskite programos versiją iš [releases](https://github.com/gabijagleiz/VU_2.uzd/releases)
 - Išarchivuokite parsisiųstą failą.
 - Paleiskite main.cpp naudojantis C++ IDE
 
