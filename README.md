@@ -24,5 +24,4 @@ Tuomet yra išvedama lentelė su įvestais duomenimis, kurią sudaro skiltys "Va
 - Paleiskite main.cpp naudojantis C++ IDE
 
 # Versijos
-- [v0.1 masyvai]()
-- [v0.1 vektoriai]()
+- [v0.1](https://github.com/gabijagleiz/VU_2.uzd/releases/tag/v0.1)
