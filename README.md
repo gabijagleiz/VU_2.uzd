@@ -17,6 +17,11 @@ Paleidus programą vartotojo prašo :
 
 Pasirinkimo metu, vartotojui pasirinkus 'n', rezultatai/kiekis yra sugeneruojami atsitiktinai. 
 Tuomet yra išvedama lentelė su įvestais duomenimis, kurią sudaro skiltys "Vardas", "Pavardė" ir pasirinktinai - "Galutinis(vid.)" arba "Galutinis(med.).
+### Svarbu
+- Įvedant pažymius ranka, juos atskirti 'space' klavišu
+- Įvedus paskutinį pažymį spausti 'enter' klavišą
+- Įvedant studentų kiekį, įvedus skaičių mažesnį/lygu 0 arba didesnį už 100, bus prašoma įvesti naują skaičių
+- Įvedant namų darbų ar egzaminų rezultatus, įvedus skaičių mažesnį už 1 arba didesnį už 10, bus prašoma įvesti naują skaičių
 
 # Programos įdiegimas
 - Atsisiųskite programos versiją iš [releases](https://github.com/gabijagleiz/VU_2.uzd/releases)
