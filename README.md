@@ -20,8 +20,8 @@ Tuomet yra išvedama lentelė su įvestais duomenimis, kurią sudaro skiltys "Va
 ### Svarbu
 - Įvedant pažymius ranka, juos atskirti 'space' klavišu
 - Įvedus paskutinį pažymį spausti 'enter' klavišą
-- Įvedant studentų kiekį, įvedus skaičių mažesnį/lygu 0 arba didesnį už 100, bus prašoma įvesti naują skaičių
-- Įvedant namų darbų ar egzaminų rezultatus, įvedus skaičių mažesnį už 1 arba didesnį už 10, bus prašoma įvesti naują skaičių
+- Įvedant studentų kiekį, įvedus skaičių mažesnį/lygu 0 arba didesnį už 100, reikės įvesti naują skaičių
+- Įvedant namų darbų ar egzaminų rezultatus, įvedus skaičių mažesnį už 1 arba didesnį už 10, reikės įvesti naują skaičių
 
 # Programos įdiegimas
 - Atsisiųskite programos versiją iš [releases](https://github.com/gabijagleiz/VU_2.uzd/releases)
