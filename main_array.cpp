@@ -6,38 +6,42 @@
 #include <stdio.h>
 
 using namespace std;
-const int k = 100;
+//const int k = 100;
 
 struct Studentas {
 	string var;    //vardas
 	string pav;    //pavarde
 	int nkiek;
-	int nd[k];     //namu darbu rezultatas
+	int *nd;     //namu darbu rezultatas
 	int egz;    //egzamino rezultatas
 	double vid;
 	double med;
 	
 };
-Studentas S[k];
 
-void skaitymas (Studentas S[k], int &sk){
+
+void skaitymas (Studentas S[], int k){
 	
 	srand ( time ( NULL ));
 	
 	char ats;
 	
-	for (int i = 0; i < sk; i++){
+	for (int i = 0; i < k; i++){
 		cout << "Iveskite studento varda ir pavarde ";
 		cin >> S[i].var >> S[i].pav;
 		cout << endl;
 		
 		cout << "Ar ivesite namu darbu kieki? (t/n) ";
 		cin >> ats;
+
 		
+
 		if (ats == 't' || ats == 'T') {                          //zinomas namu darbu kiekis
 			cout << "Iveskite namu darbu kieki ";
 		    cin >> S[i].nkiek;
 		    cout << endl;
+			S[i].nd= new (nothrow) int[S[i].nkiek];
+
 	    	cout << "Ar ivesite namu darbu rezultatus? (t/n) ";
 		    cin >> ats;
 		    
@@ -47,7 +51,7 @@ void skaitymas (Studentas S[k], int &sk){
 		    		int paz;
 					do{
 						cin >> paz;
-						S[i].nd[j] == paz;
+						S[i].nd[j] = paz;
 					} while (paz < 1 || paz > 10);
 					
 					}
@@ -63,7 +67,8 @@ void skaitymas (Studentas S[k], int &sk){
 		}
 		
 		
-		else if (ats == 'n' || ats == 'N'){                          //nezinomas namu darbu kiekis
+		else if (ats == 'n' || ats == 'N'){                   //nezinomas namu darbu kiekis
+		                 
 			cout << "Ar ivesite namu darbu rezultatus? (t/n) ";
 			cin >> ats;
 			
@@ -72,6 +77,7 @@ void skaitymas (Studentas S[k], int &sk){
 				cout << "Iveskite namu darbu rezultatus ";
 				do {
 				S[i].nkiek = 1;
+				S[i].nd= new (nothrow) int[S[i].nkiek];   
 				for (int j = 0; j < S[i].nkiek; j++){
 					cin >> paz;
 					S[i].nd[j] = paz;
@@ -83,6 +89,7 @@ void skaitymas (Studentas S[k], int &sk){
 			
 			if (ats == 'n' || ats == 'N'){
 				S[i].nkiek = rand()% 10 + 1;
+				S[i].nd= new (nothrow) int[S[i].nkiek];   
 				cout << "Sugeneruoti pazymiai ";
 				for (int j = 0; j < S[i].nkiek; j++){
 					S[i].nd[j] = rand() % 10 + 1;
@@ -91,7 +98,7 @@ void skaitymas (Studentas S[k], int &sk){
 			}	
 		}
 		
-		
+		cout << endl;
 		cout << "Ar ivesite egzamino rezultata? (t/n) ";       //egzaminas
 		cin >> ats;
 	
@@ -100,7 +107,7 @@ void skaitymas (Studentas S[k], int &sk){
 		int paz;              
 		do {
 		cin >> paz;
-		S[i].egz == paz;
+		S[i].egz = paz;
 		} while (paz <1 || paz > 10);
 		}
 	
@@ -116,10 +123,10 @@ void skaitymas (Studentas S[k], int &sk){
 }
 
 
-void vidurkis(Studentas S[k], int &sk){
+void vidurkis(Studentas S[], int k){
 	double sum = 0;
 //	double nv;
-   for (int i = 0; i < sk; i++){
+   for (int i = 0; i < k; i++){
    	  for (int j = 0; j < S[i].nkiek; j++){
    	  	sum += S[i].nd[j];
 	 }
@@ -128,8 +135,8 @@ void vidurkis(Studentas S[k], int &sk){
 }
 
 
-void sort (Studentas S[k], int &sk){
-	for (int i = 0; i < sk; i++){
+void sort (Studentas S[], int k){
+	for (int i = 0; i < k; i++){
 		for (int j = 0; j < S[i].nkiek - 1; j++){
 			for (int x = j + 1; x < S[i].nkiek; x++){
 				if (S[i].nd[j] < S[i].nd[x]) swap (S[i].nd[j], S[i].nd[x]);
@@ -139,11 +146,11 @@ void sort (Studentas S[k], int &sk){
 }
 
 
-void mediana (Studentas S[k], int &sk){
+void mediana (Studentas S[], int k){
 	double median;
 	int d = 0;
-    sort(S, sk);
-    for (int i = 0; i < sk; i++){
+    sort(S, k);
+    for (int i = 0; i < k; i++){
     	for (int j = 0; j < S[i].nkiek; j++){
     	d = S[i].nkiek;
 		if (S[i].nkiek % 2 != 0) median = S[i].nd[d / 2];
@@ -156,7 +163,7 @@ void mediana (Studentas S[k], int &sk){
 
 
 
-void print (Studentas S[k], int &sk){
+void print (Studentas S[], int k){
 	char ats;
 	cout << "Spausdinti vidurki ar mediana? (v/m) ";
 	cin >> ats;
@@ -167,7 +174,7 @@ void print (Studentas S[k], int &sk){
 	for (int i = 0; i < 45; i++)
 		cout << "-";
 	cout << endl;
-	for (int i = 0; i < sk; i++){
+	for (int i = 0; i < k; i++){
 		cout << left << setw(12) << S[i].var << setw(15) << S[i].pav << setw(15) << fixed << setprecision(2);
 		if (ats == 'v' || ats == 'V') cout << S[i].vid << endl;
 		if (ats == 'm' || ats == 'M') cout << S[i].med << endl;
@@ -178,21 +185,22 @@ void print (Studentas S[k], int &sk){
 
 
 int main(){
-	int sk;
+	int k = 0;
 	double sum = 0;
-	int r;
+//	int r;
 	
 	cout << "Kiek studentu ivesite? ";
-	do {
-	cin >> sk;
-	} while (sk <= 0 || sk > 100);
+	do{
+		cin >> k;
+	} while (k <= 0);
 	
+	Studentas *S = new Studentas[k];
 	
-	skaitymas (S, sk);
-	vidurkis (S, sk);
-	sort (S, sk);
-	mediana (S, sk);
-	print (S, sk);
+	skaitymas (S, k);
+	vidurkis (S, k);
+	sort (S, k);
+	mediana (S, k);
+	print (S, k);
 	
 	
 }
