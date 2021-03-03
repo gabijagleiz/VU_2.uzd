@@ -30,3 +30,4 @@ Tuomet yra išvedama lentelė su įvestais duomenimis, kurią sudaro skiltys "Va
 
 # Versijos
 - [v0.1](https://github.com/gabijagleiz/VU_2.uzd/releases/tag/v0.1)
+- [v0.1.1](https://github.com/gabijagleiz/VU_2.uzd/releases/tag/v.1.1) pataisyta 0.1 versija
