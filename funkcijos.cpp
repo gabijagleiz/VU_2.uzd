@@ -16,7 +16,7 @@ bool CompareLastNames(Studentas& a, Studentas& b)
     return a.pav < b.pav;
 }
 
-void rikiavimas(vector <Studentas> S)
+void rikiavimas(vector <Studentas>& S)
 {
     sort(S.begin(), S.end(), CompareLastNames);
 }
@@ -180,16 +180,25 @@ void skaitymas(vector <Studentas> S){
             getline(buffer, line);
             Studentas studentas;
 
+		 try
+        {
+            if (!df.good())
+                throw "Toks failas neegzistuoja.";
+        }
+        catch(const char *Message)
+        {
+            cout << Message << endl;
+        }
+
             while (getline(buffer, line))
             {
                 stringstream df(line);
                 int paz;
                 df >> studentas.var >> studentas.pav;
-                while (df >> paz) studentas.nd.push_back(paz);            
+                while (df >> paz) studentas.nd.push_back(paz);   
                 studentas.nd.pop_back();
                 studentas.nkiek = studentas.nd.size();
                 studentas.egz = paz;
-
                 studentas.vid = vidurkis(studentas.nd, studentas.nkiek, studentas.egz);
                 studentas.med = mediana(studentas.nd, studentas.nkiek, studentas.egz);
                 S.push_back(studentas);
@@ -197,9 +206,17 @@ void skaitymas(vector <Studentas> S){
 				k++;
             }
 
-			if (k > 0) spausdinimas (S, k);
+		try
+        {
+            if (k == 0)
+                throw "Nuskaitytas failas tuščias! ";
+        }
+        catch(const char *Message)
+        {
+            cout << Message << endl;
+        }
 
-			else cout << "Nuskaitytas failas tuscias ";
+		if (k > 0) spausdinimas(S, k);
 
 			df.close();
 }
