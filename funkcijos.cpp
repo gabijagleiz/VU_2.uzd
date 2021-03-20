@@ -21,6 +21,7 @@ void rikiavimas(vector <Studentas>& S)
     sort(S.begin(), S.end(), CompareLastNames);
 }
 
+
 //vidurkis
 double vidurkis(vector <int> nd, int nkiek, int egz){
     double vv;
@@ -46,22 +47,69 @@ double mediana (vector <int> nd, int nkiek, int egz){
 	return median * 0.4 + egz * 0.6;
 }
 
-void spausdinimas(vector <Studentas> S, int k){
-
-	rikiavimas(S);
-	cout << left << setw(12) << "Vardas " << setw(15) << "Pavarde " << setw(15) << "Galutinis (vid.) " << setw(25) << "Galutinis (med.)" <<endl;
-	for (int i = 0; i < 45; i++)
-		cout << "-";
-	cout << endl;
+void skirstymas(vector <Studentas> &S, vector <Studentas> &protingi, vector <Studentas> &nevykeliai, int k){
+	auto start = high_resolution_clock::now();
+	int pk = 0;
+	int nk = 0;
 	for (int i = 0; i < k; i++){
-		cout << left << setw(12) << S[i].var << setw(15) << S[i].pav << setw(15) << fixed << setprecision(2) << S[i].vid << setw(25) << fixed << setprecision(2) << S[i].med << endl;
+		if (S[i].gr >= 5){
+			protingi.push_back(S[i]);
+		//	pk++;
+			}
+		if (S[i].gr < 5){
+			nevykeliai.push_back(S[i]);
+			//nk++;
+			}
 	}
+	auto end= high_resolution_clock::now();
+	duration<double> diff= end-start; 
+	cout << "duomenu skirstymas uztruko: " << diff.count() << "s\n" << endl;
+
+	S.clear();
+}
+
+
+void spausdinimas(vector <Studentas> &S, vector <Studentas> &protingi, vector <Studentas> &nevykeliai){
+	auto start = high_resolution_clock::now();
+
+	ofstream rf;	
+	
+	rf.open("nevykeliai.txt");
+	rf << left << setw(12) << "Vardas " << setw(15) << "Pavarde " << setw(15) << "Galutinis " <<endl;
+	for (int i = 0; i < 45; i++)
+	rf << "-";
+	rf << endl;
+	for(int i = 0; i < nevykeliai.size(); i++){
+	rf << left << setw(12) << nevykeliai[i].var << setw(15) << nevykeliai[i].pav << setw(15) << fixed << setprecision(2) << nevykeliai[i].gr << endl;
+	}
+
+	nevykeliai.clear();
+	rf.close();
+
+	rf.open("protingi.txt");
+	rf << left << setw(12) << "Vardas " << setw(15) << "Pavarde " << setw(15) << "Galutinis "  <<endl;
+	for (int i = 0; i < 45; i++)
+	rf << "-";
+	rf << endl;
+	for(int i = 0; i < protingi.size(); i++){
+	rf << left << setw(12) << protingi[i].var << setw(15) << protingi[i].pav << setw(15) << fixed << setprecision(2) << protingi[i].gr << endl;
+	}
+
+	auto end= high_resolution_clock::now();
+	duration<double> diff= end-start; 
+	cout << "duomenu spausdinimas uztruko: " << diff.count() << "s\n" << endl;
+
+	protingi.clear();
+	rf.close();
 
 }	
 
-void ivedimas(vector <Studentas> S){
+
+
+//duomenu ivedimas ir spausdinimas
+void ivedimas(vector <Studentas> &S, vector <Studentas> &protingi, vector <Studentas> &nevykeliai){
 		int k = 0;
-//	double sum = 0;
+	double sum = 0;
 	int r;
 	
 	char ats;
@@ -158,6 +206,7 @@ void ivedimas(vector <Studentas> S){
 		cout << endl;
 	studentas.vid = vidurkis (studentas.nd, studentas.nkiek, studentas.egz);
 	studentas.med = mediana (studentas.nd, studentas.nkiek, studentas.egz);
+	studentas.gr = (studentas.vid+studentas.med) / 2;
     S.push_back(studentas);
 	k++;
 	cout << "Ar ivesite dar viena studenta? (t/n) ";
@@ -165,13 +214,17 @@ void ivedimas(vector <Studentas> S){
 	} while (pas == 't' || pas == 'T');
     }
 
-	if (pas == 'n' || pas == 'N') spausdinimas(S, k);
+	if (pas == 'n' || pas == 'N') {
+		rikiavimas(S);
+		skirstymas(S, protingi, nevykeliai, k);
+		spausdinimas(S, protingi, nevykeliai);
+	}
 	
 }
 
-
-void skaitymas(vector <Studentas> S){
-
+//egzistuojansio failo skaitymas ir spausdinimas
+void skaitymas(vector <Studentas> &S, vector <Studentas> &protingi, vector <Studentas> &nevykeliai){
+	auto start= high_resolution_clock::now();
             stringstream buffer;
             ifstream df(DFV);
             buffer << df.rdbuf();
@@ -201,6 +254,7 @@ void skaitymas(vector <Studentas> S){
                 studentas.egz = paz;
                 studentas.vid = vidurkis(studentas.nd, studentas.nkiek, studentas.egz);
                 studentas.med = mediana(studentas.nd, studentas.nkiek, studentas.egz);
+				studentas.gr = (studentas.vid+studentas.med) / 2;
                 S.push_back(studentas);
 
 				k++;
@@ -216,7 +270,111 @@ void skaitymas(vector <Studentas> S){
             cout << Message << endl;
         }
 
-		if (k > 0) spausdinimas(S, k);
+	auto end= high_resolution_clock::now();
+	duration<double> diff= end-start; 
+	cout << "Failo skaitymas uztruko: " << diff.count() << "s\n" << endl;
 
-			df.close();
+	if (k > 0) {
+		rikiavimas(S);
+		skirstymas(S, protingi, nevykeliai, k);
+		spausdinimas(S, protingi, nevykeliai);
+	}
+
+	df.close();
 }
+
+
+//naujo failo generavimas, skaitymas ir spausdinimas
+void generavimas(vector <Studentas> &S){
+	auto start= high_resolution_clock::now();
+	ofstream rf;
+	Studentas studentas;
+	int pas = 0;
+	int k = 0;
+	cout << "Kiek studentu norite sugeneruoti? " << endl;
+	cout << "1 - 1000 \n" << "2 - 10000 \n" << "3 - 100000 \n" << "4 - 1000000 \n" << "5 - 10000000\n";
+
+	do{
+		cin >> pas;
+
+		if (pas == 1) k = 1000;
+		if (pas == 2) k = 10000;
+		if (pas == 3) k = 100000;
+		if (pas == 4) k = 1000000;
+
+	}while (pas > 5 || pas < 1);
+
+	rf.open("Failas" + to_string(k) + ".txt");
+
+	for (int i = 0; i < k; i++){
+		rf << "Vardas" + to_string(i+1) << " Pavarde" + to_string(i+1);
+		studentas.nkiek = rand()% 10 + 1;
+
+		vector <int> Pazymiai;
+        vector <int>::iterator IT;
+
+		for (int j = 0; j < studentas.nkiek; j++){
+					int paz = rand() % 10 + 1;
+					Pazymiai.push_back(paz);
+				//	rf << studentas.nd.push_back(paz);
+		}
+
+	for (IT = Pazymiai.begin(); IT < Pazymiai.end(); IT++ )
+	rf << " " << *IT;
+
+	studentas.egz = rand() % 10 + 1;
+	rf << " " << studentas.egz << endl;
+	S.push_back(studentas);
+
+	}	
+	
+	
+	auto end= high_resolution_clock::now();
+	duration<double> diff= end-start; 
+	cout << k << " elementu failo kurimas uztruko: " << diff.count() << "s\n" << endl;
+	rf.close();
+}
+
+void genskaitymas(vector <Studentas> &S, vector <Studentas> &protingi, vector <Studentas> &nevykeliai){
+
+	generavimas(S);
+
+	auto start= high_resolution_clock::now();
+	stringstream buffer;
+	int i = S.size();
+	ifstream df("Failas" + to_string(i) + ".txt");				//sugeneruoto failo skaitymas
+    buffer << df.rdbuf();
+    string line;
+	int k = 0;
+   Studentas studentas;
+	if (df.good()){
+while (getline(buffer, line))
+            {
+                stringstream df(line);
+                int paz;
+                df >> studentas.var >> studentas.pav;
+				cout << studentas.var << endl;
+                while (df >> paz) studentas.nd.push_back(paz);   
+                studentas.nd.pop_back();
+                studentas.nkiek = studentas.nd.size();
+                studentas.egz = paz;
+                studentas.vid = vidurkis(studentas.nd, studentas.nkiek, studentas.egz);
+                studentas.med = mediana(studentas.nd, studentas.nkiek, studentas.egz);
+				studentas.gr = (studentas.vid+studentas.med) / 2;
+                S.push_back(studentas);
+				k++;
+            }
+	
+	
+	auto end= high_resolution_clock::now();
+	duration<double> diff= end-start; 
+	cout << "Failo skaitymas uztruko: " << diff.count() << "s\n" << endl;
+
+	if (k > 0) {
+		rikiavimas(S);
+		skirstymas(S, protingi, nevykeliai, k);
+		spausdinimas(S, protingi, nevykeliai);
+	}}
+	df.close();
+}
+
