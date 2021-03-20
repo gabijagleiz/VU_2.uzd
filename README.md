@@ -1,7 +1,7 @@
 # VU_2.uzd
 
 # Paskirtis
-Programa skirta studentų duomenų išvedimui į lentelę.
+Programa skirta studentų duomenų nuskaitymui ir išskaidymui į du atskirus failus.
 
 # Veikimo principas
 Paleidus programą vartotojo prašo :
