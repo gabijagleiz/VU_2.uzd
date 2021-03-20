@@ -49,3 +49,4 @@ Tada duomenys yra išrikiuojami ir išvedami į du failus: protingi (galutinis �
 - [v0.2](https://github.com/gabijagleiz/VU_2.uzd/releases/tag/v0.2) pridėta galimybė skaityti duomenis iš failo
 - [v0.3](https://github.com/gabijagleiz/VU_2.uzd/releases/tag/v0.3) pridėtas header failas, du cpp failai
 - [v0.3.1](https://github.com/gabijagleiz/VU_2.uzd/releases/tag/v0.3.1) pridėtas išimčių valdymas
+- [v0.4](https://github.com/gabijagleiz/VU_2.uzd/releases/tag/v0.4) pridėta galimybėta generuoti naują studentų failą. Duomenų išskaidymas į du failus.
