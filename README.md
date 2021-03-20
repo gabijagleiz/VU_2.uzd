@@ -5,6 +5,9 @@ Programa skirta studentų duomenų išvedimui į lentelę.
 
 # Veikimo principas
 Paleidus programą vartotojo prašo :
+- Pasirinkti ar duomenys bus įvedami, skaitomi ar generuojamas naujas atsitiktinis failas (rašyti 'i' (įvedami), 's' (skaitomi) arba 'g' (generuojami)) 
+
+### Pasirinkus 'i' (duomenys įvedami), vartotojo prašoma:
 - Įvesti studentų kiekį 
 - Įvesti studento vardą, pavardę
 - Pasirinkti, ar namų darbų kiekis bus įvedamas ranka (rašyti 't' (Taip) arba 'n' (Ne))
@@ -15,8 +18,20 @@ Paleidus programą vartotojo prašo :
   - Pasirinkus 't', įvesti egzamino rezultatą
 - Pasirinkti, ar norima išvesti vidurkį, ar medianą (rašyti 'v' (vidurkį) arba 'm' (medianą))
 
-Pasirinkimo metu, vartotojui pasirinkus 'n', rezultatai/kiekis yra sugeneruojami atsitiktinai. 
-Tuomet yra išvedama lentelė su įvestais duomenimis, kurią sudaro skiltys "Vardas", "Pavardė" ir pasirinktinai - "Galutinis(vid.)" arba "Galutinis(med.).
+
+Įvedant duomenis, vartotojui pasirinkus 'n', rezultatai/kiekis yra sugeneruojami atsitiktinai. 
+
+Tada duomenys yra išrikiuojami ir išvedami į du failus: protingi (galutinis įvertinimas >=5) ir nevykeliai (galutinis įvertinimas <5).
+
+### Pasirinkus 's' (duomenys skaitomi):
+- duomenys yra nuskaitomi, išrikiuojami ir išvedami į du failus: protingi (galutinis įvertinimas >=5) ir nevykeliai (galutinis įvertinimas <5)
+
+### Pasirinkus 'g' (duomenys generuojami), vartotojo prašoma: 
+-Pasirinkti studentų kiekį (1 - 1000, 2 - 10000, 3 - 100000, 4 - 100000, 5 - 1000000)
+-Pasirinkus 1, bus generuojama 1000 studentų, pasirinkus 2 - 10000 ir t.t.
+
+Tada duomenys yra išrikiuojami ir išvedami į du failus: protingi (galutinis įvertinimas >=5) ir nevykeliai (galutinis įvertinimas <5).
+
 ### Svarbu
 - Įvedant pažymius ranka, juos atskirti 'space' klavišu
 - Įvedus paskutinį pažymį spausti 'enter' klavišą
@@ -31,3 +46,6 @@ Tuomet yra išvedama lentelė su įvestais duomenimis, kurią sudaro skiltys "Va
 # Versijos
 - [v0.1](https://github.com/gabijagleiz/VU_2.uzd/releases/tag/v0.1)
 - [v0.1.1](https://github.com/gabijagleiz/VU_2.uzd/releases/tag/v.1.1) pataisyta 0.1 versija
+- [v0.2](https://github.com/gabijagleiz/VU_2.uzd/releases/tag/v0.2) pridėta galimybė skaityti duomenis iš failo
+- [v0.3](https://github.com/gabijagleiz/VU_2.uzd/releases/tag/v0.3) pridėtas header failas, du cpp failai
+- [v0.3.1](https://github.com/gabijagleiz/VU_2.uzd/releases/tag/v0.3.1) pridėtas išimčių valdymas
