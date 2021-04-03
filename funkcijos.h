@@ -8,6 +8,8 @@
 #include <cmath>
 #include <stdio.h>
 #include <vector>
+#include <list>
+#include <deque>
 #include <fstream>
 #include <sstream>
 #include <iomanip>
@@ -30,15 +32,3 @@ struct Studentas {
 	
 };
 
-void sort (vector <Studentas> S, int k);
-bool CompareLastNames(Studentas& a, Studentas& b);
-void rikiavimas(vector <Studentas>& S);
-double vidurkis(vector <Studentas> S, int k);
-double mediana (vector <Studentas> S, int k);
-void skirstymas(vector <Studentas> &S, vector <Studentas> &protingi, vector <Studentas> &nevykeliai, int k);
-void spausdinimas(vector <Studentas> &S, vector <Studentas> &protingi, vector <Studentas> &nevykeliai);
-//void spausdinimas(vector <Studentas> S, int k);
-void ivedimas(vector <Studentas> &S, vector <Studentas> &protingi, vector <Studentas> &nevykeliai);
-void skaitymas(vector <Studentas> &S, vector <Studentas> &protingi, vector <Studentas> &nevykeliai);
-void generavimas(vector <Studentas> &S);
-void genskaitymas(vector <Studentas> &S, vector <Studentas> &protingi, vector <Studentas> &nevykeliai);
