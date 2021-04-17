@@ -50,3 +50,6 @@ Tada duomenys yra išrikiuojami ir išvedami į du failus: protingi (galutinis �
 - [v0.3](https://github.com/gabijagleiz/VU_2.uzd/releases/tag/v0.3) pridėtas header failas, du cpp failai
 - [v0.3.1](https://github.com/gabijagleiz/VU_2.uzd/releases/tag/v0.3.1) pridėtas išimčių valdymas
 - [v0.4](https://github.com/gabijagleiz/VU_2.uzd/releases/tag/v0.4) pridėta galimybėta generuoti naują studentų failą. Duomenų išskaidymas į du failus.
+- [v0.5](https://github.com/gabijagleiz/VU_2.uzd/releases/tag/v0.5) pridėta galimybė rinktis konteinerį
+- [v0.5.1](https://github.com/gabijagleiz/VU_2.uzd/releases/tag/v0.5.1) patobulinta 0.5 versija
+- [v1.0](https://github.com/gabijagleiz/VU_2.uzd/releases/tag/v0.1) dvi strategijos grupuoti studentus
