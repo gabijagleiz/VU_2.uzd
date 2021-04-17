@@ -70,19 +70,16 @@ void skirstymas(T& S, T& protingi, T& nevykeliai, int k){
 
 	S.clear();
 }
-/*
-void skirstymas(vector <Studentas> &S, vector <Studentas> &protingi, vector <Studentas> &nevykeliai, int k){
+
+template <class T>
+void skirstymas(T& S, T& protingi, int k){
 	auto start = high_resolution_clock::now();
 	int pk = 0;
 	int nk = 0;
 	for (int i = 0; i < k; i++){
-		if (S[i].gr >= 5){
-			protingi.push_back(S[i]);
-		//	pk++;
-			}
-		if (S[i].gr < 5){
-			nevykeliai.push_back(S[i]);
-			//nk++;
+		if (S.back().gr >= 5){
+			protingi.push_back(S.back());
+			S.erase(S.begin() + 0);
 			}
 	}
 	auto end= high_resolution_clock::now();
@@ -90,7 +87,7 @@ void skirstymas(vector <Studentas> &S, vector <Studentas> &protingi, vector <Stu
 	cout << "duomenu skirstymas uztruko: " << diff.count() << "s\n" << endl;
 
 	S.clear();
-}*/
+}
 
 
 template <class T>
@@ -242,7 +239,7 @@ void ivedimas(T& S, T& protingi, T& nevykeliai){
 
 	if (pas == 'n' || pas == 'N') {
 		rikiavimas(S);
-		skirstymas(S, protingi, nevykeliai, k);
+	//	skirstymas(S, protingi, nevykeliai, k);
 		spausdinimas(S, protingi, nevykeliai);
 	}
 	
@@ -318,7 +315,7 @@ void skaitymas(T& S, T& protingi, T& nevykeliai){
 
 	if (k > 0) {
 		rikiavimas(S);
-		skirstymas(S, protingi, nevykeliai, k);
+	//	skirstymas(S, protingi, nevykeliai, k);
 		spausdinimas(S, protingi, nevykeliai);
 	}
 
@@ -417,7 +414,7 @@ while (getline(buffer, line))
 
 	if (k > 0) {
 		rikiavimas(S);
-		skirstymas(S, protingi, nevykeliai, k);
+		//skirstymas(S, protingi, nevykeliai, k);
 		spausdinimas(S, protingi, nevykeliai);
 	}}
 	df.close();
@@ -426,13 +423,25 @@ while (getline(buffer, line))
 template <class T>
 void duomenys(T& S, T& protingi, T& nevykeliai){
 	char ats;
+	int st;
 
 	cout << "Duomenis ivesite, skaitysite ar generuosite naujus? (i/s/g)\n";
 	cin >> ats;
-	if (ats == 'i' || ats == 'I') ivedimas(S, protingi, nevykeliai);
-	if (ats == 's' || ats == 'S') skaitymas(S, protingi, nevykeliai);
-	if (ats == 'g' || ats == 'G') genskaitymas(S, protingi, nevykeliai);
-
+	cout << "Duomenu grupavimui naudosite 1 strategija (rusiavimas i du naujus konteinerius)
+	ar 2 (rusiavimas naudojant tik viena nauja konteineri)? (1/2)\n"
+	cin >> st;
+	if (st == 1){
+		skirstymas(S, protingi, nevykeliai, k);
+		if (ats == 'i' || ats == 'I') ivedimas(S, protingi, nevykeliai);
+		if (ats == 's' || ats == 'S') skaitymas(S, protingi, nevykeliai);
+		if (ats == 'g' || ats == 'G') genskaitymas(S, protingi, nevykeliai);
+}
+	if (st == 2){
+		skirstymas(S, protingi, k);
+		if (ats == 'i' || ats == 'I') ivedimas(S, protingi, nevykeliai);
+		if (ats == 's' || ats == 'S') skaitymas(S, protingi, nevykeliai);
+		if (ats == 'g' || ats == 'G') genskaitymas(S, protingi, nevykeliai);
+	}
 }
 
 //template <class T>
