@@ -49,21 +49,25 @@ double mediana (vector <int> nd, int nkiek, int egz){
 }
 
 
+bool isWinner(Studentas const& S)
+{
+    return (S.gr >= 5);
+}
+
+bool isLooser(Studentas const& S)
+{
+    return (S.gr < 5);
+}
+
 template <class T>
-void skirstymas(T& S, T& protingi, T& nevykeliai, int k){
+void skirstymas(T& S, T& protingi, T& nevykeliai){
 	auto start = high_resolution_clock::now();
-	int pk = 0;
-	int nk = 0;
-	for (int i = 0; i < k; i++){
-		if (S.back().gr >= 5){
-			protingi.push_back(S.back());
-		//	pk++;
-			}
-		if (S.back().gr < 5){
-			nevykeliai.push_back(S.back());
-			//nk++;
-			}
-	}
+
+//	for (int i = 0; i < S.size(); i++){
+		copy_if(S.begin(), S.end(), back_inserter(protingi), isWinner);
+		copy_if(S.begin(), S.end(), back_inserter(nevykeliai), isLooser);
+//	}
+
 	auto end= high_resolution_clock::now();
 	duration<double> diff= end-start; 
 	cout << "duomenu skirstymas uztruko: " << diff.count() << "s\n" << endl;
@@ -71,15 +75,16 @@ void skirstymas(T& S, T& protingi, T& nevykeliai, int k){
 	S.clear();
 }
 
+
 template <class T>
-void skirstymas(T& S, T& protingi, int k){
-	auto start = high_resolution_clock::now();
+void skirstymas(T& S, T& protingi){
 	int pk = 0;
 	int nk = 0;
-	for (int i = 0; i < k; i++){
+	auto start = high_resolution_clock::now();
+	for (int i = 0; i < S.size(); i++){
 		if (S.back().gr >= 5){
-			protingi.push_back(S.back());
-			S.erase(S.begin() + 0);
+			copy_if(S.begin(), S.end(), back_inserter(protingi), isWinner);
+			S.erase(remove_if(S.begin(), S.end(), isWinner ), S.end());
 			}
 	}
 	auto end= high_resolution_clock::now();
