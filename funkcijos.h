@@ -41,6 +41,8 @@ void rikiavimas(T& );
 double vidurkis(vector <Studentas> S, int k);
 double mediana (vector <Studentas> S, int k);
 
+bool isWinner(Studentas const& S);
+bool isLooser(Studentas const& S);
 
 template <class T>
 void skirstymas(T&, T&, T&, int k);
