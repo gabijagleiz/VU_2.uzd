@@ -14,6 +14,7 @@ void sort (vector <Studentas> S, int k){
 bool CompareLastNames(Studentas& a, Studentas& b)
 {
     return a.pav < b.pav;
+
 }
 
 template<class T>
@@ -49,46 +50,38 @@ double mediana (vector <int> nd, int nkiek, int egz){
 }
 
 
+bool isWinner(Studentas const& S)
+{
+    return (S.gr >= 5);
+}
+
+bool isLooser(Studentas const& S)
+{
+    return (S.gr < 5);
+}
+
 template <class T>
 void skirstymas(T& S, T& protingi, T& nevykeliai){
 	auto start = high_resolution_clock::now();
 
-	for (int i = 0; i < S.size(); i++){
-			copy_if(S.begin(), S.end(), protingi.begin(), [](Studentas S) {return S.gr >= 5;});
-		copy_if(S.begin(), S.end(), nevykeliai.begin(), [](Studentas S) {return S.gr < 5;});
-	}
+//	for (int i = 0; i < S.size(); i++){
+		copy_if(S.begin(), S.end(), back_inserter(protingi), isWinner);
+		copy_if(S.begin(), S.end(), back_inserter(nevykeliai), isLooser);
+//	}
+
 	auto end= high_resolution_clock::now();
 	duration<double> diff= end-start; 
 	cout << "duomenu skirstymas uztruko: " << diff.count() << "s\n" << endl;
 
-	S.clear();
+	//S.clear();
 }
-/*
-void skirstymas(vector <Studentas> &S, vector <Studentas> &protingi, vector <Studentas> &nevykeliai, int k){
-	auto start = high_resolution_clock::now();
-	int pk = 0;
-	int nk = 0;
-	for (int i = 0; i < k; i++){
-		if (S[i].gr >= 5){
-			protingi.push_back(S[i]);
-		//	pk++;
-			}
-		if (S[i].gr < 5){
-			nevykeliai.push_back(S[i]);
-			//nk++;
-			}
-	}
-	auto end= high_resolution_clock::now();
-	duration<double> diff= end-start; 
-	cout << "duomenu skirstymas uztruko: " << diff.count() << "s\n" << endl;
-
-	S.clear();
-}*/
 
 
 template <class T>
 void spausdinimas(T& S, T& protingi, T& nevykeliai){
 //	auto start = high_resolution_clock::now();
+
+//	skirstymas(S, protingi, nevykeliai);
 
 	ofstream rf;	
 	
@@ -250,25 +243,24 @@ void skaitymas(T& S, T& protingi, T& nevykeliai){
 	int pas;
 
 	cout << "Koki studentu kieki nuskaityti?\n" << "1 - 1000 \n" << "2 - 10000 \n" << "3 - 100000 \n" << "4 - 1000000 \n" << "5 - 10000000\n";
-	do{
+//	do{
 		cin >> pas;
-	//	if (pas == 0) k = 10;
+		if (pas == 0) k = 10;
 		if (pas == 1) k = 1000;
 		if (pas == 2) k = 10000;
 		if (pas == 3) k = 100000;
 		if (pas == 4) k = 1000000;
 		if (pas == 5) k = 10000000;
 
-	}while (pas > 5 || pas < 1);
+	//}while (pas > 5 || pas < 1);
 
 	auto start= high_resolution_clock::now();
 
 	stringstream buffer;
-       ifstream df("Failas" + to_string(k) + ".txt");
-        buffer << df.rdbuf();
+    ifstream df("Failas" + to_string(k) + ".txt");
+    buffer << df.rdbuf();
 	string line;
-        getline(buffer, line);
-        Studentas studentas;
+    Studentas studentas;
 
 
 		 try
@@ -281,13 +273,13 @@ void skaitymas(T& S, T& protingi, T& nevykeliai){
             cout << Message << endl;
         }
 
-		if (df.good()){
+	//	if (df.good()){
         while (getline(buffer, line))
             {
 				stringstream df(line);
                 int paz;
                 df >> studentas.var >> studentas.pav;
-			//	cout << 1 << " ";
+			//	cout << studentas.var << " ";
                 while (df >> paz) studentas.nd.push_back(paz);   
                 studentas.nd.pop_back();
                 studentas.nkiek = studentas.nd.size();
@@ -314,14 +306,21 @@ void skaitymas(T& S, T& protingi, T& nevykeliai){
 	auto end= high_resolution_clock::now();
 	duration<double> diff= end-start; 
 	cout << "Failo skaitymas uztruko: " << diff.count() << "s\n" << endl;
+	/*
+	for (int j = 0; j < p; j++){
+		cout << S[j].var << " ";
+	}*/
 
 	if (p > 0) {
+		cout << p << endl;
 		skirstymas(S, protingi, nevykeliai);
 		spausdinimas(S, protingi, nevykeliai);
 	}
-		}
 	df.close();
 }
+
+	
+//}
 
 
 //naujo failo generavimas, skaitymas ir spausdinimas
@@ -337,7 +336,7 @@ void generavimas(T& S){
 
 	do{
 		cin >> pas;
-		//if (pas == 0) k = 10;
+		if (pas == 0) k = 10;
 		if (pas == 1) k = 1000;
 		if (pas == 2) k = 10000;
 		if (pas == 3) k = 100000;
