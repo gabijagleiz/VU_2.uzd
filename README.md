@@ -43,6 +43,11 @@ Tada duomenys yra išrikiuojami ir išvedami į du failus: protingi (galutinis �
 - Išarchivuokite parsisiųstą failą.
 - Paleiskite main.cpp naudojantis C++ IDE
 
+| Container | 1000 | 10000 | 100000 | 1000000 | 10000000 |
+| --- | --- | --- | --- | --- | ---|
+| Vector | 0,0855s | 1,214s | 4,552s | 20,137s | 106,815s |
+| List | 0,0974s | 1,364s | 3,981s | 25,504s | 101,294s |
+| Deque | 0,892s | 1,258s | 4,028s | 29,567s | 101,885s|
 # Versijos
 - [v0.1](https://github.com/gabijagleiz/VU_2.uzd/releases/tag/v0.1)
 - [v0.1.1](https://github.com/gabijagleiz/VU_2.uzd/releases/tag/v.1.1) pataisyta 0.1 versija
